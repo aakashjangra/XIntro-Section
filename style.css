@@ -217,6 +217,7 @@ a:focus-visible {
 }
 
 /* Overlay fix: above page content, below the mobile navigation */
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -329,52 +330,8 @@ a:focus-visible {
 }
 
 /* Mobile layout and navigation */
+
 @media (max-width: 767px) {
-  .header {
-    min-height: 72px;
-    padding: 22px 20px;
-    justify-content: space-between;
-    gap: 20px;
-  }
-
-  .logo {
-    width: 84px;
-  }
-
-  .open-menu {
-    width: 34px;
-    height: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 5px;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-  }
-
-  .open-menu span {
-    width: 30px;
-    height: 3px;
-    background: var(--almost-black);
-  }
-
-  .open-menu span:nth-child(2) {
-    width: 22px;
-  }
-
-  .close-menu {
-    display: block;
-    align-self: flex-end;
-    border: 0;
-    background: transparent;
-    font-size: 40px;
-    font-weight: 300;
-    line-height: 1;
-    cursor: pointer;
-  }
-
   .nav {
     position: fixed;
     top: 0;
@@ -395,6 +352,20 @@ a:focus-visible {
     transition: transform 0.25s ease, visibility 0.25s ease;
   }
 
+  .close-menu {
+    position: relative;
+    z-index: 31;
+    display: block;
+    align-self: flex-end;
+    flex-shrink: 0;
+    border: 0;
+    background: transparent;
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1;
+    cursor: pointer;
+  }
+
   body.menu-open .nav {
     visibility: visible;
     transform: translateX(0);
@@ -405,128 +376,8 @@ a:focus-visible {
     opacity: 1;
     pointer-events: auto;
   }
-
-  .nav-list {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 25px;
-  }
-
-  .nav-item {
-    width: 100%;
-  }
-
-  .nav-link {
-    font-size: 15px;
-  }
-
-  .simple-link {
-    display: inline-flex;
-  }
-
-  .dropdown-list,
-  .features-dropdown,
-  .company-dropdown {
-    position: static;
-    min-width: 0;
-    width: 100%;
-    padding: 0 0 0 22px;
-    margin-top: 20px;
-    background: transparent;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .dropdown-list.visible {
-    display: block;
-  }
-
-  .dropdown-link + .dropdown-link {
-    margin-top: 18px;
-  }
-
-  .dropdown-link a {
-    font-size: 14px;
-  }
-
-  .registration {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    width: 100%;
-  }
-
-  .registration button {
-    width: 100%;
-    padding: 11px 16px;
-    font-size: 14px;
-  }
-
-  .hero {
-    width: 100%;
-    margin: 0 auto 35px;
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 0;
-  }
-
-  .hero-picture {
-    width: 100%;
-    max-width: none;
-    justify-self: auto;
-  }
-
-  .hero-picture img {
-    width: 100%;
-    max-height: 360px;
-    object-fit: contain;
-  }
-
-  .text-content {
-    width: 100%;
-    padding: 43px 18px 0;
-    align-items: center;
-    text-align: center;
-  }
-
-  .text-content h1 {
-    max-width: none;
-    font-size: clamp(34px, 9vw, 42px);
-    letter-spacing: -1.5px;
-    line-height: 1.15;
-    margin-bottom: 18px;
-  }
-
-  .text-content p {
-    max-width: 460px;
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 24px;
-  }
-
-  .learn-more {
-    min-height: 48px;
-    padding: 0 24px;
-  }
-
-  .clients {
-    margin-top: 48px;
-    gap: 15px;
-    justify-content: space-between;
-  }
-
-  .clients img {
-    width: 20%;
-    max-width: 78px;
-    max-height: 25px;
-  }
-
-  .attribution {
-    padding-top: 12px;
-  }
 }
+
 
 @media (min-width: 768px) and (max-width: 1050px) {
   .header {
