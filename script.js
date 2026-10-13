@@ -7,11 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector(".nav");
   const dropdownItems = document.querySelectorAll(".has-dropdown");
 
-  function openMenu() {
-    body.classList.add("menu-open");
-    openMenuButton.setAttribute("aria-expanded", "true");
-    overlay.setAttribute("aria-hidden", "false");
+function toggleMenu() {
+    if (body.classList.contains("menu-open")) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   }
+
 
   function closeMenu() {
     body.classList.remove("menu-open");
@@ -30,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  openMenuButton.addEventListener("click", openMenu);
+    openMenuButton.addEventListener("click", toggleMenu);
 
   closeMenuButton.addEventListener("click", closeMenu);
 

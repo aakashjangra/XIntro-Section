@@ -341,6 +341,7 @@ a:focus-visible {
     gap: 0;
   }
 
+
   .open-menu {
     display: flex;
     flex-direction: column;
@@ -419,6 +420,16 @@ a:focus-visible {
   .clients img {
     max-width: 22%;
     height: auto;
+  }
+
+      /* Lift the header (and its drawer) above the overlay when open */
+  body.menu-open .header {
+    z-index: 40;
+  }
+
+  /* Hide the hamburger while the drawer is open */
+  body.menu-open .open-menu {
+    visibility: hidden;
   }
 }
 
