@@ -5,56 +5,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeMenuButton = document.querySelector(".close-menu");
   const overlay = document.querySelector(".overlay");
   const nav = document.querySelector(".nav");
-
-  const dropdownButtons = document.querySelectorAll(".nav-link");
   const dropdownItems = document.querySelectorAll(".has-dropdown");
 
-  // Open the mobile navigation menu.
   function openMenu() {
     body.classList.add("menu-open");
     openMenuButton.setAttribute("aria-expanded", "true");
     overlay.setAttribute("aria-hidden", "false");
   }
 
-  // Close the mobile navigation menu.
   function closeMenu() {
     body.classList.remove("menu-open");
     openMenuButton.setAttribute("aria-expanded", "false");
     overlay.setAttribute("aria-hidden", "true");
   }
-
-  openMenuButton.addEventListener("click", openMenu);
-  closeMenuButton.addEventListener("click", closeMenu);
-  overlay.addEventListener("click", closeMenu);
-
-  // Close the menu when Escape is pressed.
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeMenu();
-      closeAllDropdowns();
-    }
-  });
-
-  // Find dropdown buttons and toggle their menus only on click.
-  dropdownItems.forEach((item) => {
-    const button = item.querySelector(".nav-link");
-    const dropdown = item.querySelector(".dropdown-list");
-
-    button.addEventListener("click", (event) => {
-      event.stopPropagation();
-
-      const wasOpen = button.classList.contains("link-open");
-
-      // Close all other dropdowns before toggling the selected one.
-      closeAllDropdowns();
-
-      if (!wasOpen) {
-        button.classList.add("link-open");
-        button.setAttribute("aria-expanded", "true");
-        dropdown.classList.add("visible");
-      }
-    });
-  });
 
   function closeAllDropdowns() {
     dropdownItems.forEach((item) => {
@@ -67,14 +30,47 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Close dropdowns when clicking elsewhere on the page.
+  openMenuButton.addEventListener("click", openMenu);
+
+  closeMenuButton.addEventListener("click", closeMenu);
+
+  overlay.addEventListener("click", closeMenu);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+      closeAllDropdowns();
+    }
+  });
+
+  // Dropdowns open and close on click, not on hover.
+  dropdownItems.forEach((item) => {
+    const button = item.querySelector(".nav-link");
+    const dropdown = item.querySelector(".dropdown-list");
+
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      const wasOpen = button.classList.contains("link-open");
+
+      closeAllDropdowns();
+
+      if (!wasOpen) {
+        button.classList.add("link-open");
+        button.setAttribute("aria-expanded", "true");
+        dropdown.classList.add("visible");
+      }
+    });
+  });
+
+  // Clicking outside a dropdown closes it.
   document.addEventListener("click", (event) => {
     if (!event.target.closest(".has-dropdown")) {
       closeAllDropdowns();
     }
   });
 
-  // Close mobile navigation when a regular navigation link is selected.
+  // Selecting a navigation link closes the mobile menu.
   nav.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
       closeMenu();
@@ -82,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Reset mobile navigation when resizing to desktop.
+  // Restore desktop navigation behavior after resizing.
   window.addEventListener("resize", () => {
     if (window.innerWidth >= 768) {
       closeMenu();
